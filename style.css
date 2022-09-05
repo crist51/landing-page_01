@@ -1,0 +1,389 @@
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+
+/* ---------- fait disparaitre le cursor ---------- */
+html {
+  cursor: none;
+}
+a, button, input, label, textarea, img {
+  cursor: none;
+}
+/* ------------------------------------------------ */
+
+body {
+  font-family: Montserrat, Helvetica, sans-serif;
+  background: #0a0c10;
+}
+
+::selection{
+  background:  #8fd9c3;
+  color:black;
+}
+
+.custom-cursor {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid #e3e3e3c1;
+  position: fixed;
+  z-index: 100;
+  pointer-events: none;
+} 
+.custom-cursor::after {
+  content: "";
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid #111;
+  background: #f4f4f4;
+  position: absolute;
+  /* technique centrer parfaitement */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  /* ------------------------------ */
+}
+@media (pointer:coarse) {/* si on est sur tablette ou portable*/
+  .custom-cursor {
+    display: none;
+  }
+}
+
+nav {
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  background:  #8fd9c3a4;
+}
+nav p {
+  position: absolute;
+  width: clamp(30px, 4vw, 40px);
+  left: 15px;
+}
+
+nav a {
+  color: #f0f0f0;
+  text-decoration: none;
+  font-size: clamp(14px, 2vw, 20px);/*14 min, sinon 2 vw max 20px*/
+  margin: 0 15px;
+  position: relative;
+}
+
+nav a::before {
+  content: "";
+  display: block;
+  position: absolute;
+  background: #6f6f6fd0;
+  width: 100%;
+  height: 1px;
+  bottom: -2px;
+  left: 0;
+  transform-origin: left;/* commence left */
+  transform: scaleX(33%); /*il occupe 33%*/
+  transition: transform 0.2s ease-out; /*duré de l'animation*/
+}
+
+nav a:hover::before {
+  transform: scaleX(100%);/*au passage grandit a 100% */
+  background: #f1f1f1;
+}
+
+nav ::selection{
+  background-color: black;
+  color: #8fd9c3;
+}
+
+.hero {
+  height: 100vh;
+  min-height: 700px;
+  border-bottom: 1px solide #f1f1f124;
+  text-align: center;
+  padding-top: 150px;
+  position: relative;
+  background: url(asset/cryptocom-partenariat-equipe-f1-aston-martin.webp);
+  background-size: 100vw;
+  background-repeat: no-repeat;
+  background-position: center;/*reduit vers le milieux*/
+}
+
+h1 {
+  font-size: clamp(24px, 8vw, 80px);/*24 min, sinon 8 vw max 80px*/
+  display: inline-block;
+  font-weight: 800;
+  color: #f0f0f0;
+  text-transform: uppercase;
+  background-image: linear-gradient(to right, #999, #fff);/*degradé vers la droite*/
+  background-clip: text; /*on decoupe le fond du texte*/
+  -webkit-background-clip: text;/*pour chrome*/
+  color: transparent;
+  position: relative;
+}
+h1::after {
+  content: "";
+  position: absolute;
+  display: block;
+  height: 100%;
+  width: 3px;
+  background: #ebebeb;
+  right: -10px;
+  top: 0;
+  animation: carret 1s infinite;
+}
+@keyframes carret {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* .subtitle {
+  font-family: Raleway;
+  color: #f1f1f1;
+  font-weight: 200;
+  font-size: clamp(16px, 2vw, 20px);
+  margin-top: 10px;
+  opacity: 0;
+  transition: opacity 0.8s ease-out;
+}
+.subtitle.active {
+  opacity: 1;
+} */
+
+.hero-push-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40px auto 0;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid #f1f1f136;
+  background: #111;
+  position: absolute;
+  bottom: clamp(30px,7.5vw, 75px);/*30 min, sinon 7.5 vw max 75px*/
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.8s ease-out;
+}
+.hero-push-link.active {
+  opacity: 1;
+}
+.hero-push-link img {
+  width: 30%;
+  pointer-events: none;/*impossible de cliquer dessus*/
+}
+
+@media (max-width: 1000px) {
+  .hero {
+    min-height: 600px;
+    height: auto;
+  }
+}
+
+main.container {
+  max-width: 1100px;
+  margin: 0 auto;/*pour le centrer*/
+  border-right: 1px solid #8fd9c3;
+  border-left: 1px solid #8fd9c3;
+  padding: 0 clamp(10px, 12vw, 120px);/*10 min, sinon 12 vw max 120px*/
+  color: #f1f1f1;
+  overflow-x: hidden;/*supprime la borre*/
+}
+.container section {
+  padding: clamp(10px, 5vw, 50px) 0;/*padding en haut et en bas*/
+}
+section h2 {
+  font-size: clamp(30px, 6vw, 60px);/* 30 min, sinon 6 vw max 60px*/
+  margin-bottom: 0 10px;
+  text-align: center;
+  font-weight: 200;
+}
+section h2 span {
+  font-weight: 800;
+}
+.section-subtitle {
+  text-align: center;
+  margin-bottom: clamp(15px, 5vw, 50px);
+}
+.discover-content {
+  max-height: 500px;
+  display: flex;
+  justify-content: center;
+}
+.text-discover-content {
+  width: 50%;
+}
+.text-discover-content h3 {
+  font-family: Raleway;
+  font-size: clamp(16px, 3vw, 30px);
+  font-weight: 400;
+  margin-bottom: 30px;
+}
+.text-discover-content p {
+  line-height: 1.4;
+  font-weight: 200;
+  padding-right: 70px;
+}
+.discover-link {
+  max-width: 175px;
+  padding: 10px 15px;
+  color: #f1f1f1;
+  margin-top: 50px;
+  text-decoration: none;
+  background: transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #f1f1f168;
+}
+.discover-link img {
+  width: 15px;
+}
+.discover-main-img {
+  width: 50%;
+  object-fit: cover;
+}
+
+.contact{
+  transition: background-color 0.6s ease-in-out;
+}
+
+.contact:hover{
+  background-color: #8fd9c3;
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* Animations */
+
+h2,
+.section-subtitle,
+.text-discover-content > *,
+.discover-main-img {
+  opacity: 0;
+  transform: translateY(-5px);
+  transition: 
+  opacity 0.5s 0.3s ease-out,
+  transform 0.5s 0.3s ease-out;
+}
+
+
+h2.active,
+.section-subtitle.active,
+.text-discover-content > *.active ,
+.discover-main-img.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 1100px) {
+  main.container {
+    border-right: 0;
+    border-left: 0;
+  }
+}
+@media (max-width: 800px) {
+  .discover-content {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    max-height: fit-content;
+  }
+  .text-discover-content {
+    width: 100%;
+  }
+  .text-discover-content p {
+    padding-right: 0px;
+  }
+  .discover-link {
+    margin: 30px auto;
+  }
+  .discover-main-img {
+    display: none;
+  }
+}
+
+.side-apparition-container {
+  display: flex;
+  /* max-height: 200px;permer de mieux les gerer */
+  margin: 100px 0;
+}
+.side-slide-content {
+  padding: 0 20px;
+  width: 35%;
+}
+.side-slide-content h3 {
+  font-family: Raleway;
+  font-weight: 300;
+}
+.side-slide-content p {
+  margin-top: 20px;
+  color: gray;
+  line-height: 1.2;
+}
+.side-apparition-container img {
+  width: 65%;
+  object-fit: cover;
+  object-position: 0 70%;
+}
+
+/* Animations */
+.side-apparition-container {
+  transform: translateX(30px) skew(20deg);/*skew distortion 20deg*/
+  opacity: 0;
+  transition: transform 0.4s ease-out, opacity 0.4s ease-out;
+}
+.side-apparition-container:nth-child(odd) {/*odd = impaire*/
+  transform: translateX(-30px) skew(-20deg);
+}
+.side-apparition-container.active {/*quand cette class aura la class active qui seras donnée par le JS*/
+  transform: translateX(0px) skew(0deg);
+  opacity: 1;
+}
+@media (max-width: 600px) {
+  .side-apparition-container{
+    flex-direction: column;
+    align-items: center;
+  }
+  .side-slide-content, .side-apparition-container img {
+    width: 100%;
+  }
+  .side-apparition-container {
+    max-height: fit-content;
+    margin: 50px 0;
+  }
+  .side-slide-content {
+    margin-bottom: 30px;
+    padding: 0;
+  }
+
+  /* pour lelement 2 */
+  .side-apparition-container:nth-child(even) img {
+    order: 2;/*on change l'ordre*/
+  }
+  .side-apparition-container:nth-child(even) .side-slide-content {
+    order: 1;/*on change l'ordre*/
+  }
+  /* ---------- */
+}
+
+img{
+  object-fit: cover;
+  width: 100%;
+  ;
+}
